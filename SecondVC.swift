@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import AVFoundation
-
+//
 struct Photo {
     let image: UIImage
 }
@@ -37,6 +37,8 @@ class SecondVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         title = "Pic"
+        
+        
         
         // Check if the device supports camera
         guard let device = AVCaptureDevice.default(for: .video) else {

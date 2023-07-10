@@ -4,6 +4,7 @@
 //
 //  Created by Karon Bell on 7/10/23.
 //
+//
 
 import UIKit
 
@@ -27,18 +28,37 @@ class photoCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.square.fill"), style: .plain, target: self, action: #selector(didTapBackButton))
-        backButton.tintColor = .black
-        navigationItem.leftBarButtonItem = backButton
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-     
+           super.viewDidLoad()
 
-        // Set the delegate and data source of the collection view
-          collectionView.delegate = self
-          collectionView.dataSource = self
-    }
+        // Register the cell class with the reuse identifier
+               collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+           // ...
+
+           // Set the delegate and data source of the collection view
+           collectionView.delegate = self
+           collectionView.dataSource = self
+        
+        // Set the navigation title
+           let titleLabel = UILabel()
+           titleLabel.text = "Flicks"
+           titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+           titleLabel.textColor = .black
+           navigationItem.titleView = titleLabel
+
+           // Set the delegate and data source of the collection view
+           collectionView.delegate = self
+           collectionView.dataSource = self
+
+           // Set the item size of the collection view flow layout
+           if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+               let itemSize = CGSize(width: UIScreen.main.bounds.width / 3 - 20, height: UIScreen.main.bounds.width / 1.3 - 73) // Adjust the size as desired
+               layout.itemSize = itemSize
+               layout.minimumInteritemSpacing = 8 // Adjust the spacing as desired
+               layout.minimumLineSpacing = 10 // Adjust the spacing as desired
+               layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Adjust the insets as desired
+           }
+       }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
