@@ -20,6 +20,8 @@ class SecondVC: UIViewController {
     private var closeButton: UIButton!
     private var cameraToggleButton: UIButton!
     private var currentCamera: AVCaptureDevice?
+    private var isPhotoCaptured = false
+
 
     
     override func viewDidLoad() {
@@ -94,30 +96,34 @@ class SecondVC: UIViewController {
           ])
       }
       
-      @objc func didTapCameraToggleButton() {
-          session.beginConfiguration()
-          
-          // Remove existing input
-          if let currentInput = session.inputs.first as? AVCaptureDeviceInput {
-              session.removeInput(currentInput)
-          }
-          
-          // Get the new device
-          let newCameraPosition: AVCaptureDevice.Position = (currentCamera?.position == .back) ? .front : .back
-          let newCamera = getCamera(with: newCameraPosition)
-          
-          // Create new input
-          do {
-              let newInput = try AVCaptureDeviceInput(device: newCamera!)
-              session.addInput(newInput)
-              currentCamera = newCamera
-          } catch {
-              print("Error configuring new camera input: \(error.localizedDescription)")
-          }
-          
-          session.commitConfiguration()
-      }
-    
+    @objc func didTapCameraToggleButton() {
+        session.beginConfiguration()
+
+        // Get the new device
+        let newCameraPosition: AVCaptureDevice.Position = (currentCamera?.position == .front) ? .back : .front
+        let newCamera = getCamera(with: newCameraPosition)
+
+        // Remove existing input
+        if let currentInput = session.inputs.first as? AVCaptureDeviceInput {
+            session.removeInput(currentInput)
+        }
+
+        // Create new input
+        do {
+            let newInput = try AVCaptureDeviceInput(device: newCamera!)
+            if session.canAddInput(newInput) {
+                session.addInput(newInput)
+                currentCamera = newCamera
+            } else {
+                showAlert(message: "Unable to add video input")
+            }
+        } catch {
+            print("Error configuring new camera input: \(error.localizedDescription)")
+        }
+
+        session.commitConfiguration()
+    }
+
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Camera Error", message: message, preferredStyle: .alert)
@@ -132,21 +138,26 @@ class SecondVC: UIViewController {
      
     
     @objc func didTapFlickButton() {
-        
+        guard !isPhotoCaptured else {
+            return
+        }
+
+        isPhotoCaptured = true
+
         title = ""
         flickButton.setTitle("", for: .normal)
         cameraToggleButton.isHidden = true
-        
+
         guard let videoConnection = previewLayer.connection else {
             return
         }
-        
+
         videoConnection.videoOrientation = .portrait  // Adjust the desired orientation here
-        
-        
+
         let settings = AVCapturePhotoSettings()
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
+    
 }
 
 // Implement AVCapturePhotoCaptureDelegate to handle captured photo
@@ -196,6 +207,6 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
         title = "flick"
         flickButton.setTitle("Flick", for: .normal)
         cameraToggleButton.isHidden = false
-        
+        isPhotoCaptured = false
     }
 }
