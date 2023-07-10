@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 import AVFoundation
 
+struct Photo {
+    let image: UIImage
+}
+
+
 class SecondVC: UIViewController {
     private let session = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
@@ -21,7 +26,11 @@ class SecondVC: UIViewController {
     private var cameraToggleButton: UIButton!
     private var currentCamera: AVCaptureDevice?
     private var isPhotoCaptured = false
-
+    let photoArtFrameButton = UIButton(type: .system)
+    let dockArrowButton = UIButton(type: .system)
+    private weak var photoCollectionView: UICollectionView?
+    
+    static var photosArray: [Photo] = []
 
     
     override func viewDidLoad() {
@@ -94,6 +103,9 @@ class SecondVC: UIViewController {
               cameraToggleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
               cameraToggleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
           ])
+        
+        photosButton()
+        dockArrowButton.isHidden = true
       }
       
     @objc func didTapCameraToggleButton() {
@@ -136,6 +148,102 @@ class SecondVC: UIViewController {
          return discoverySession.devices.first { $0.position == position }
      }
      
+    func photosButton() {
+        // Add photo.artframe button
+        let photoArtFrameButton = UIButton(type: .system)
+        let buttonSize: CGFloat = 88
+        let imageSize = CGSize(width: buttonSize - 40, height: buttonSize - 30) // Adjust image size as desired
+        
+        let originalImage = UIImage(systemName: "photo.artframe")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let resizedImage = resizeImage(originalImage, targetSize: imageSize)
+        photoArtFrameButton.setImage(resizedImage, for: .normal)
+        photoArtFrameButton.tintColor = .white
+        photoArtFrameButton.imageView?.contentMode = .scaleAspectFit
+        photoArtFrameButton.addTarget(self, action: #selector(didTapPhotoArtFrameButton), for: .touchUpInside)
+        photoArtFrameButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(photoArtFrameButton)
+        
+        NSLayoutConstraint.activate([
+            photoArtFrameButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 28),
+            photoArtFrameButton.bottomAnchor.constraint(equalTo: flickButton.topAnchor, constant: 140),
+            photoArtFrameButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            photoArtFrameButton.heightAnchor.constraint(equalToConstant: buttonSize)
+        ])
+        
+     
+        let dockButtonSize: CGFloat = 130
+        
+        dockArrowButton.setImage(UIImage(systemName: "dock.arrow.down.rectangle"), for: .normal)
+        dockArrowButton.tintColor = .white
+        dockArrowButton.addTarget(self, action: #selector(didTapDockArrowButton), for: .touchUpInside)
+        dockArrowButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dockArrowButton)
+        
+        NSLayoutConstraint.activate([
+            dockArrowButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -38),
+            dockArrowButton.bottomAnchor.constraint(equalTo: photoArtFrameButton.bottomAnchor, constant: -26),
+        ])
+    }
+   
+    @objc func didTapDockArrowButton() {
+          if let image = imageView.image {
+              savePhotoToCollection(image: image)
+          }
+
+          // Reset the view after saving the photo
+          imageView.removeFromSuperview()
+          closeButton.removeFromSuperview()
+          title = "flick"
+          flickButton.setTitle("Flick", for: .normal)
+          cameraToggleButton.isHidden = false
+          isPhotoCaptured = false
+          photoArtFrameButton.isHidden = false
+          dockArrowButton.isHidden = true
+      }
+
+    @objc func didTapPhotoArtFrameButton() {
+        let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray)
+        photoCollectionVC.modalTransitionStyle = .coverVertical
+        photoCollectionVC.modalPresentationStyle = .fullScreen
+
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.square.fill"), style: .plain, target: nil, action: nil)
+        backButton.tintColor = .white
+        navigationItem.backBarButtonItem = backButton
+        navigationController?.pushViewController(photoCollectionVC, animated: true)
+
+        // Assign the reference of the collection view to the property
+        photoCollectionView = photoCollectionVC.collectionView
+    }
+
+
+
+
+    private func savePhotoToCollection(image: UIImage) {
+           let photo = Photo(image: image)
+           SecondVC.photosArray.append(photo) // Access the photosArray directly from SecondVC
+       }
+    
+
+       // ...
+
+
+
+    func resizeImage(_ image: UIImage?, targetSize: CGSize) -> UIImage? {
+        guard let image = image else {
+            return nil
+        }
+        
+        let scaledSize = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: targetSize)).size
+        let renderer = UIGraphicsImageRenderer(size: scaledSize)
+        
+        let resizedImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: scaledSize))
+        }
+        
+        return resizedImage.withRenderingMode(.alwaysOriginal)
+    }
+
+   
     
     @objc func didTapFlickButton() {
         guard !isPhotoCaptured else {
@@ -147,6 +255,9 @@ class SecondVC: UIViewController {
         title = ""
         flickButton.setTitle("", for: .normal)
         cameraToggleButton.isHidden = true
+        photoArtFrameButton.isHidden = true
+        dockArrowButton.isHidden = false
+      
 
         guard let videoConnection = previewLayer.connection else {
             return
@@ -208,5 +319,8 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
         flickButton.setTitle("Flick", for: .normal)
         cameraToggleButton.isHidden = false
         isPhotoCaptured = false
+        photoArtFrameButton.isHidden = false
+        dockArrowButton.isHidden = true
     }
 }
+//

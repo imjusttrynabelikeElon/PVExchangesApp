@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */; };
 		C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95287D82A5BB42D001F2846 /* ThirdVC.swift */; };
 		C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42762A5B13D50042B107 /* AppDelegate.swift */; };
 		C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42782A5B13D50042B107 /* SceneDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewController.swift; sourceTree = "<group>"; };
 		C95287D82A5BB42D001F2846 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
 		C96F42732A5B13D50042B107 /* PVExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96F42762A5B13D50042B107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */,
+				C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */,
 				C95287D82A5BB42D001F2846 /* ThirdVC.swift */,
 				C96F42A92A5B16310042B107 /* Tabbar.swift */,
 				C96F42752A5B13D50042B107 /* PVExchange */,
@@ -281,6 +284,7 @@
 				C96F427B2A5B13D50042B107 /* ViewController.swift in Sources */,
 				C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */,
 				C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */,
+				C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
