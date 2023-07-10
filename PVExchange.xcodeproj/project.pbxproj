@@ -1,0 +1,640 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95287D82A5BB42D001F2846 /* ThirdVC.swift */; };
+		C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42762A5B13D50042B107 /* AppDelegate.swift */; };
+		C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42782A5B13D50042B107 /* SceneDelegate.swift */; };
+		C96F427B2A5B13D50042B107 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F427A2A5B13D50042B107 /* ViewController.swift */; };
+		C96F427E2A5B13D50042B107 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96F427C2A5B13D50042B107 /* Main.storyboard */; };
+		C96F42812A5B13D50042B107 /* PVExchange.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C96F427F2A5B13D50042B107 /* PVExchange.xcdatamodeld */; };
+		C96F42832A5B13D60042B107 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C96F42822A5B13D60042B107 /* Assets.xcassets */; };
+		C96F42862A5B13D60042B107 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C96F42842A5B13D60042B107 /* LaunchScreen.storyboard */; };
+		C96F42912A5B13D60042B107 /* PVExchangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42902A5B13D60042B107 /* PVExchangeTests.swift */; };
+		C96F429B2A5B13D60042B107 /* PVExchangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F429A2A5B13D60042B107 /* PVExchangeUITests.swift */; };
+		C96F429D2A5B13D60042B107 /* PVExchangeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F429C2A5B13D60042B107 /* PVExchangeUITestsLaunchTests.swift */; };
+		C96F42AA2A5B16310042B107 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42A92A5B16310042B107 /* Tabbar.swift */; };
+		C9ECB4612A5B2F3200269C3B /* FirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECB4602A5B2F3200269C3B /* FirstVC.swift */; };
+		C9ECB4632A5B2F6E00269C3B /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C96F428D2A5B13D60042B107 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F426B2A5B13D50042B107 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C96F42722A5B13D50042B107;
+			remoteInfo = PVExchange;
+		};
+		C96F42972A5B13D60042B107 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C96F426B2A5B13D50042B107 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C96F42722A5B13D50042B107;
+			remoteInfo = PVExchange;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C95287D82A5BB42D001F2846 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
+		C96F42732A5B13D50042B107 /* PVExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C96F42762A5B13D50042B107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C96F42782A5B13D50042B107 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C96F427A2A5B13D50042B107 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C96F427D2A5B13D50042B107 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C96F42802A5B13D50042B107 /* PVExchange.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PVExchange.xcdatamodel; sourceTree = "<group>"; };
+		C96F42822A5B13D60042B107 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C96F42852A5B13D60042B107 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C96F42872A5B13D60042B107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C96F428C2A5B13D60042B107 /* PVExchangeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PVExchangeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C96F42902A5B13D60042B107 /* PVExchangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVExchangeTests.swift; sourceTree = "<group>"; };
+		C96F42962A5B13D60042B107 /* PVExchangeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PVExchangeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C96F429A2A5B13D60042B107 /* PVExchangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVExchangeUITests.swift; sourceTree = "<group>"; };
+		C96F429C2A5B13D60042B107 /* PVExchangeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVExchangeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C96F42A92A5B16310042B107 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		C9ECB4602A5B2F3200269C3B /* FirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVC.swift; sourceTree = "<group>"; };
+		C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C96F42702A5B13D50042B107 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F42892A5B13D60042B107 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F42932A5B13D60042B107 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C96F426A2A5B13D50042B107 = {
+			isa = PBXGroup;
+			children = (
+				C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */,
+				C95287D82A5BB42D001F2846 /* ThirdVC.swift */,
+				C96F42A92A5B16310042B107 /* Tabbar.swift */,
+				C96F42752A5B13D50042B107 /* PVExchange */,
+				C96F428F2A5B13D60042B107 /* PVExchangeTests */,
+				C96F42992A5B13D60042B107 /* PVExchangeUITests */,
+				C96F42742A5B13D50042B107 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C96F42742A5B13D50042B107 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C96F42732A5B13D50042B107 /* PVExchange.app */,
+				C96F428C2A5B13D60042B107 /* PVExchangeTests.xctest */,
+				C96F42962A5B13D60042B107 /* PVExchangeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C96F42752A5B13D50042B107 /* PVExchange */ = {
+			isa = PBXGroup;
+			children = (
+				C96F42762A5B13D50042B107 /* AppDelegate.swift */,
+				C96F42782A5B13D50042B107 /* SceneDelegate.swift */,
+				C96F427A2A5B13D50042B107 /* ViewController.swift */,
+				C9ECB4602A5B2F3200269C3B /* FirstVC.swift */,
+				C96F427C2A5B13D50042B107 /* Main.storyboard */,
+				C96F42822A5B13D60042B107 /* Assets.xcassets */,
+				C96F42842A5B13D60042B107 /* LaunchScreen.storyboard */,
+				C96F42872A5B13D60042B107 /* Info.plist */,
+				C96F427F2A5B13D50042B107 /* PVExchange.xcdatamodeld */,
+			);
+			path = PVExchange;
+			sourceTree = "<group>";
+		};
+		C96F428F2A5B13D60042B107 /* PVExchangeTests */ = {
+			isa = PBXGroup;
+			children = (
+				C96F42902A5B13D60042B107 /* PVExchangeTests.swift */,
+			);
+			path = PVExchangeTests;
+			sourceTree = "<group>";
+		};
+		C96F42992A5B13D60042B107 /* PVExchangeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C96F429A2A5B13D60042B107 /* PVExchangeUITests.swift */,
+				C96F429C2A5B13D60042B107 /* PVExchangeUITestsLaunchTests.swift */,
+			);
+			path = PVExchangeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C96F42722A5B13D50042B107 /* PVExchange */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C96F42A02A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchange" */;
+			buildPhases = (
+				C96F426F2A5B13D50042B107 /* Sources */,
+				C96F42702A5B13D50042B107 /* Frameworks */,
+				C96F42712A5B13D50042B107 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PVExchange;
+			productName = PVExchange;
+			productReference = C96F42732A5B13D50042B107 /* PVExchange.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C96F428B2A5B13D60042B107 /* PVExchangeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C96F42A32A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeTests" */;
+			buildPhases = (
+				C96F42882A5B13D60042B107 /* Sources */,
+				C96F42892A5B13D60042B107 /* Frameworks */,
+				C96F428A2A5B13D60042B107 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C96F428E2A5B13D60042B107 /* PBXTargetDependency */,
+			);
+			name = PVExchangeTests;
+			productName = PVExchangeTests;
+			productReference = C96F428C2A5B13D60042B107 /* PVExchangeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C96F42952A5B13D60042B107 /* PVExchangeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C96F42A62A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeUITests" */;
+			buildPhases = (
+				C96F42922A5B13D60042B107 /* Sources */,
+				C96F42932A5B13D60042B107 /* Frameworks */,
+				C96F42942A5B13D60042B107 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C96F42982A5B13D60042B107 /* PBXTargetDependency */,
+			);
+			name = PVExchangeUITests;
+			productName = PVExchangeUITests;
+			productReference = C96F42962A5B13D60042B107 /* PVExchangeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C96F426B2A5B13D50042B107 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					C96F42722A5B13D50042B107 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					C96F428B2A5B13D60042B107 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = C96F42722A5B13D50042B107;
+					};
+					C96F42952A5B13D60042B107 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = C96F42722A5B13D50042B107;
+					};
+				};
+			};
+			buildConfigurationList = C96F426E2A5B13D50042B107 /* Build configuration list for PBXProject "PVExchange" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C96F426A2A5B13D50042B107;
+			productRefGroup = C96F42742A5B13D50042B107 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C96F42722A5B13D50042B107 /* PVExchange */,
+				C96F428B2A5B13D60042B107 /* PVExchangeTests */,
+				C96F42952A5B13D60042B107 /* PVExchangeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C96F42712A5B13D50042B107 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C96F42862A5B13D60042B107 /* LaunchScreen.storyboard in Resources */,
+				C96F42832A5B13D60042B107 /* Assets.xcassets in Resources */,
+				C96F427E2A5B13D50042B107 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F428A2A5B13D60042B107 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F42942A5B13D60042B107 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C96F426F2A5B13D50042B107 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C96F42812A5B13D50042B107 /* PVExchange.xcdatamodeld in Sources */,
+				C9ECB4612A5B2F3200269C3B /* FirstVC.swift in Sources */,
+				C9ECB4632A5B2F6E00269C3B /* SecondVC.swift in Sources */,
+				C96F42AA2A5B16310042B107 /* Tabbar.swift in Sources */,
+				C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */,
+				C96F427B2A5B13D50042B107 /* ViewController.swift in Sources */,
+				C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */,
+				C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F42882A5B13D60042B107 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C96F42912A5B13D60042B107 /* PVExchangeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C96F42922A5B13D60042B107 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C96F429B2A5B13D60042B107 /* PVExchangeUITests.swift in Sources */,
+				C96F429D2A5B13D60042B107 /* PVExchangeUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C96F428E2A5B13D60042B107 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C96F42722A5B13D50042B107 /* PVExchange */;
+			targetProxy = C96F428D2A5B13D60042B107 /* PBXContainerItemProxy */;
+		};
+		C96F42982A5B13D60042B107 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C96F42722A5B13D50042B107 /* PVExchange */;
+			targetProxy = C96F42972A5B13D60042B107 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C96F427C2A5B13D50042B107 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C96F427D2A5B13D50042B107 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C96F42842A5B13D60042B107 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C96F42852A5B13D60042B107 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C96F429E2A5B13D60042B107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C96F429F2A5B13D60042B107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C96F42A12A5B13D60042B107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PVExchange/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchange;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C96F42A22A5B13D60042B107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PVExchange/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchange;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C96F42A42A5B13D60042B107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchangeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PVExchange.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PVExchange";
+			};
+			name = Debug;
+		};
+		C96F42A52A5B13D60042B107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchangeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PVExchange.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PVExchange";
+			};
+			name = Release;
+		};
+		C96F42A72A5B13D60042B107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchangeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PVExchange;
+			};
+			name = Debug;
+		};
+		C96F42A82A5B13D60042B107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A3M4AFU3DN;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = G.O.D.PVExchangeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PVExchange;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C96F426E2A5B13D50042B107 /* Build configuration list for PBXProject "PVExchange" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C96F429E2A5B13D60042B107 /* Debug */,
+				C96F429F2A5B13D60042B107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C96F42A02A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchange" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C96F42A12A5B13D60042B107 /* Debug */,
+				C96F42A22A5B13D60042B107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C96F42A32A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C96F42A42A5B13D60042B107 /* Debug */,
+				C96F42A52A5B13D60042B107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C96F42A62A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C96F42A72A5B13D60042B107 /* Debug */,
+				C96F42A82A5B13D60042B107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C96F427F2A5B13D50042B107 /* PVExchange.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C96F42802A5B13D50042B107 /* PVExchange.xcdatamodel */,
+			);
+			currentVersion = C96F42802A5B13D50042B107 /* PVExchange.xcdatamodel */;
+			path = PVExchange.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C96F426B2A5B13D50042B107 /* Project object */;
+}
