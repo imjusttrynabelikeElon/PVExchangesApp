@@ -57,7 +57,7 @@ class SecondVC: UIViewController {
         } catch {
             showAlert(message: "Error configuring camera")
         }
-        
+        //
         
         
         // Add flick button
