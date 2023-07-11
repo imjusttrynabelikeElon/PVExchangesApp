@@ -292,7 +292,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: nil)
         
         
-        SecondVC.photosArray.append(photo)
+       
     }
     
     
@@ -364,39 +364,64 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
 
 
 
-// Implement AVCapturePhotoCaptureDelegate to handle captured photo
-extension SecondVC: AVCapturePhotoCaptureDelegate {
+   extension SecondVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-          if let error = error {
-              print("Error capturing photo: \(error.localizedDescription)")
-              return
-          }
-          
-          guard let imageData = photo.fileDataRepresentation(),
-                let image = UIImage(data: imageData) else {
-              print("Error creating image from photo data.")
-              return
-          }
-          
-          guard let location = locationManager.location else {
-              print("Location is not available.")
-              return
-          }
-          
-          guard let asset = getLastPhotoAsset() else {
-              print("Asset is not available.")
-              return
-          }
-          
-          let identifier = asset.localIdentifier
-          let date = asset.creationDate
-          
-          let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: location)
-          SecondVC.photosArray.append(photo)
-          
-          // Continue with any additional processing or UI updates
-          // ...
-      }
+        if let error = error {
+            print("Error capturing photo: \(error.localizedDescription)")
+            return
+        }
+        
+        guard let imageData = photo.fileDataRepresentation(),
+              let image = UIImage(data: imageData) else {
+            print("Error creating image from photo data.")
+            return
+        }
+        
+        // Create and configure the image view
+        imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: flickButton.topAnchor, constant: -20)
+        ])
+        
+        // Create and configure the close button
+        closeButton = UIButton(type: .system)
+        closeButton.setTitle("X", for: .normal)
+        closeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+        
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+        ])
+        
+        guard let location = locationManager.location else {
+            print("Location is not available.")
+            return
+        }
+        
+        guard let asset = getLastPhotoAsset() else {
+            print("Asset is not available.")
+            return
+        }
+        
+        let identifier = asset.localIdentifier
+        let date = asset.creationDate
+        
+        let capturedPhoto = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: location)
+        SecondVC.photosArray.append(capturedPhoto)
+        
+        // Continue with any additional processing or UI updates
+        // ...
+    }
     
     @objc func didTapCloseButton() {
         imageView.removeFromSuperview()
@@ -409,4 +434,4 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
         dockArrowButton.isHidden = true
     }
 }
-//
+
