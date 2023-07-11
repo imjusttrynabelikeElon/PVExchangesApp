@@ -72,7 +72,8 @@ class PhotoDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 loadingAlert.dismiss(animated: true) {
                     if let photoMetadata = photoMetadata {
-                        let metadataActionTitle = "City: \(photoMetadata.city.description)\nDate: \(photoMetadata.date)"
+                        let metadataActionTitle = "City: \(photoMetadata.city.description)\nDate: \(photoMetadata.date)\nTime: \(photoMetadata.dateTime)"
+
                         
                         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                         let metadataAction = UIAlertAction(title: metadataActionTitle, style: .default) { [weak self] _ in
@@ -118,37 +119,24 @@ class PhotoDetailViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         dateFormatter.timeZone = TimeZone.current
-        let date = dateFormatter.string(from: photo.asset.creationDate ?? Date())
+        let date = dateFormatter.string(from: photo.creationDate ?? Date())
 
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "HH:mm:ss"
         timeFormatter.timeZone = TimeZone.current
-        let time = timeFormatter.string(from: photo.asset.creationDate ?? Date())
+        let time = timeFormatter.string(from: photo.creationDate ?? Date())
 
         let dateTime = "\(date) \(time)"
 
-        guard let location = photo.asset.location else {
-            // If location is not available, try to get the city using reverse geocoding
-            getLocation(for: photo.asset) { [weak self] location in
-                guard let location = location else {
-                    // If reverse geocoding fails, set the city as "Unknown"
-                    let photoMetadata = PhotoMetadata(dateTime: dateTime, city: "Unknown", latitude: 0, longitude: 0, date: date)
-                    completion(photoMetadata)
-                    return
-                }
-                
-                // Get the city name based on the location
-                self?.getLocationString(from: location) { city in
-                    let photoMetadata = PhotoMetadata(dateTime: dateTime, city: city ?? "Unknown", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, date: date)
-                    completion(photoMetadata)
-                }
+        if let location = photo.location {
+            // Location is available, directly retrieve the city using reverse geocoding
+            getLocationString(from: location) { city in
+                let photoMetadata = PhotoMetadata(dateTime: dateTime, city: city ?? "Unknown", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, date: date)
+                completion(photoMetadata)
             }
-            return
-        }
-        
-        // Location is available, directly retrieve the city using reverse geocoding
-        getLocationString(from: location) { city in
-            let photoMetadata = PhotoMetadata(dateTime: dateTime, city: city ?? "Unknown", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, date: date)
+        } else {
+            // If location is not available, set the city as "Unknown"
+            let photoMetadata = PhotoMetadata(dateTime: dateTime, city: "Unknown", latitude: 0, longitude: 0, date: date)
             completion(photoMetadata)
         }
     }
@@ -226,7 +214,12 @@ struct PhotoMetadata {
     let latitude: Double
     let longitude: Double
     let date: String // Add this property for the date information
+    
+    var displayString: String {
+        return "City: \(city)\nDate: \(date)\nTime: \(dateTime)"
+    }
 }
+
 
 
     

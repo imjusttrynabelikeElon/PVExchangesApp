@@ -34,13 +34,14 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
     private var closeButton: UIButton!
     private var cameraToggleButton: UIButton!
     private var currentCamera: AVCaptureDevice?
+    private var currentLocation: CLLocation?
     private var isPhotoCaptured = false
     let photoArtFrameButton = UIButton(type: .system)
     let dockArrowButton = UIButton(type: .system)
     private weak var photoCollectionView: UICollectionView?
     
     static var photosArray: [Photo] = []
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,21 +105,21 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
     }
     
     func cameraToggle() {
-          // Add camera toggle button
-          cameraToggleButton = UIButton(type: .system)
-          cameraToggleButton.setImage(UIImage(systemName: "crop.rotate"), for: .normal)
-          cameraToggleButton.addTarget(self, action: #selector(didTapCameraToggleButton), for: .touchUpInside)
-          cameraToggleButton.translatesAutoresizingMaskIntoConstraints = false
-          view.addSubview(cameraToggleButton)
-          
-          NSLayoutConstraint.activate([
-              cameraToggleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-              cameraToggleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
-          ])
+        // Add camera toggle button
+        cameraToggleButton = UIButton(type: .system)
+        cameraToggleButton.setImage(UIImage(systemName: "crop.rotate"), for: .normal)
+        cameraToggleButton.addTarget(self, action: #selector(didTapCameraToggleButton), for: .touchUpInside)
+        cameraToggleButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(cameraToggleButton)
+        
+        NSLayoutConstraint.activate([
+            cameraToggleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            cameraToggleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+        ])
         
         photosButton()
         dockArrowButton.isHidden = true
-      }
+    }
     
     func getLocation(for asset: PHAsset, completion: @escaping (CLLocation?) -> Void) {
         guard let location = asset.location else {
@@ -140,20 +141,20 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
             completion(updatedLocation)
         }
     }
-
-      
+    
+    
     @objc func didTapCameraToggleButton() {
         session.beginConfiguration()
-
+        
         // Get the new device
         let newCameraPosition: AVCaptureDevice.Position = (currentCamera?.position == .front) ? .back : .front
         let newCamera = getCamera(with: newCameraPosition)
-
+        
         // Remove existing input
         if let currentInput = session.inputs.first as? AVCaptureDeviceInput {
             session.removeInput(currentInput)
         }
-
+        
         // Create new input
         do {
             let newInput = try AVCaptureDeviceInput(device: newCamera!)
@@ -166,10 +167,10 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         } catch {
             print("Error configuring new camera input: \(error.localizedDescription)")
         }
-
+        
         session.commitConfiguration()
     }
-
+    
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Camera Error", message: message, preferredStyle: .alert)
@@ -178,10 +179,10 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
     }
     
     private func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-         let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
-         return discoverySession.devices.first { $0.position == position }
-     }
-     
+        let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
+        return discoverySession.devices.first { $0.position == position }
+    }
+    
     func photosButton() {
         // Add photo.artframe button
         let photoArtFrameButton = UIButton(type: .system)
@@ -204,7 +205,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
             photoArtFrameButton.heightAnchor.constraint(equalToConstant: buttonSize)
         ])
         
-     
+        
         let dockButtonSize: CGFloat = 130
         
         dockArrowButton.setImage(UIImage(systemName: "dock.arrow.down.rectangle"), for: .normal)
@@ -221,7 +222,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
     
     func testLocation() {
         locationManager.delegate = self
-
+        
         let authorizationStatus = CLLocationManager.authorizationStatus()
         if authorizationStatus == .authorizedWhenInUse {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -232,60 +233,73 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
             // Handle location authorization denied case
         }
     }
-   
+    
+    
     @objc func didTapDockArrowButton() {
-          if let image = imageView.image {
-              savePhotoToCollection(image: image)
-          }
+        // Check if the image view is not nil and contains an image
+        guard let image = imageView?.image else {
+            print("Error: Image is nil.")
+            return
+        }
 
-          // Reset the view after saving the photo
-          imageView.removeFromSuperview()
-          closeButton.removeFromSuperview()
-          title = "flick"
-          flickButton.setTitle("Flick", for: .normal)
-          cameraToggleButton.isHidden = false
-          isPhotoCaptured = false
-          photoArtFrameButton.isHidden = false
-          dockArrowButton.isHidden = true
-      }
+        savePhotoToCollection(image: image)
 
+        // Reset the view after saving the photo
+        imageView?.removeFromSuperview()
+        closeButton?.removeFromSuperview()
+        title = "flick"
+        flickButton.setTitle("Flick", for: .normal)
+        cameraToggleButton.isHidden = false
+        isPhotoCaptured = false
+        photoArtFrameButton.isHidden = false
+        dockArrowButton.isHidden = true
+    }
+
+    
     @objc func didTapPhotoArtFrameButton() {
         let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray)
         photoCollectionVC.modalTransitionStyle = .coverVertical
         photoCollectionVC.modalPresentationStyle = .fullScreen
-
+        
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.square.fill"), style: .plain, target: nil, action: nil)
         backButton.tintColor = .black
         navigationItem.backBarButtonItem = backButton
         navigationController?.pushViewController(photoCollectionVC, animated: true)
-
+        
         // Assign the reference of the collection view to the property
         photoCollectionView = photoCollectionVC.collectionView
     }
-
-
-
-
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            return
+        }
+        
+        currentLocation = location
+    }
+    
+    
     private func savePhotoToCollection(image: UIImage) {
         guard let asset = getLastPhotoAsset() else {
             return
         }
         
         let identifier = asset.localIdentifier
-      
+        
         let date = asset.creationDate // Get the creation date from the asset
-
+        
         let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: nil)
-
+        
         
         SecondVC.photosArray.append(photo)
     }
-
-
-       // ...
-
-
-
+    
+    
+    // ...
+    
+    
+    
     func resizeImage(_ image: UIImage?, targetSize: CGSize) -> UIImage? {
         guard let image = image else {
             return nil
@@ -300,86 +314,89 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         
         return resizedImage.withRenderingMode(.alwaysOriginal)
     }
-
-   
+    
+    
+    private func getLastPhotoAsset() -> PHAsset? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.fetchLimit = 1
+        
+        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        return fetchResult.firstObject
+    }
     
     @objc func didTapFlickButton() {
+        guard let location = locationManager.location else {
+            // Location is not available, handle the case accordingly
+            return
+        }
+        
+        guard let asset = getLastPhotoAsset() else {
+            // Asset is not available, handle the case accordingly
+            return
+        }
+        
+        let identifier = asset.localIdentifier
+        let date = asset.creationDate
+        
         guard !isPhotoCaptured else {
             return
         }
-
+        
         isPhotoCaptured = true
-
+        
         title = ""
         flickButton.setTitle("", for: .normal)
         cameraToggleButton.isHidden = true
         photoArtFrameButton.isHidden = true
         dockArrowButton.isHidden = false
-      
-
+        
         guard let videoConnection = previewLayer.connection else {
             return
         }
-
+        
         videoConnection.videoOrientation = .portrait  // Adjust the desired orientation here
-
+        
         let settings = AVCapturePhotoSettings()
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
-    
 }
 
-private func getLastPhotoAsset() -> PHAsset? {
-    let fetchOptions = PHFetchOptions()
-    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-    fetchOptions.fetchLimit = 1
-    
-    let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-    return fetchResult.firstObject
-}
 
 
 // Implement AVCapturePhotoCaptureDelegate to handle captured photo
 extension SecondVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        if let error = error {
-            print("Error capturing photo: \(error.localizedDescription)")
-            return
-        }
-        
-        guard let imageData = photo.fileDataRepresentation(),
-              let image = UIImage(data: imageData) else {
-            print("Error creating image from photo data.")
-            print(photo.fileDataRepresentation())
-            return
-        }
-        
-        // Create and configure the image view
-        imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: flickButton.topAnchor, constant: -20)
-        ])
-        
-        // Create and configure the close button
-        closeButton = UIButton(type: .system)
-        closeButton.setTitle("X", for: .normal)
-        closeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(closeButton)
-        
-        NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
-        ])
-    }
+          if let error = error {
+              print("Error capturing photo: \(error.localizedDescription)")
+              return
+          }
+          
+          guard let imageData = photo.fileDataRepresentation(),
+                let image = UIImage(data: imageData) else {
+              print("Error creating image from photo data.")
+              return
+          }
+          
+          guard let location = locationManager.location else {
+              print("Location is not available.")
+              return
+          }
+          
+          guard let asset = getLastPhotoAsset() else {
+              print("Asset is not available.")
+              return
+          }
+          
+          let identifier = asset.localIdentifier
+          let date = asset.creationDate
+          
+          let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: location)
+          SecondVC.photosArray.append(photo)
+          
+          // Continue with any additional processing or UI updates
+          // ...
+      }
     
     @objc func didTapCloseButton() {
         imageView.removeFromSuperview()
