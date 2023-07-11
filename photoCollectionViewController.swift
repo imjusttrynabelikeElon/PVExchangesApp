@@ -22,7 +22,7 @@ class photoCollectionViewController: UICollectionViewController {
            // Call the designated initializer of the superclass
            super.init(collectionViewLayout: UICollectionViewFlowLayout())
        }
-    
+    // this is the required init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -70,6 +70,14 @@ class photoCollectionViewController: UICollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = photosArray[indexPath.item]
+        let detailViewController = PhotoDetailViewController(photo: photo)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
+      
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
            return photosArray.count
@@ -93,7 +101,6 @@ class photoCollectionViewController: UICollectionViewController {
     }
 }
 
-
 class PhotoCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "PhotoCell"
     
@@ -104,6 +111,16 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         
         configureImageView()
     }
+    // this is the amount
+    // go to the collectionViewTime
+    // goToTheAmountofDidTapBackButton
+    // goToTheAmountTheTheirIsTheFrontButton
+    // goToThisAmountTheAmountOfVibeItTakesTo
+  
+    
+    // thisIsforcollectionThis
+    // thisShowsThisAmount
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

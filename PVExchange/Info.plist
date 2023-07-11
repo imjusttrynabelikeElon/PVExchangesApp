@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>may we use your location? from CEO - Karon</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Can we have acess to your photos?</string>
 	<key>CFBundleExecutable</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>

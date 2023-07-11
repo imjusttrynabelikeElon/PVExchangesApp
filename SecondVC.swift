@@ -8,19 +8,28 @@
 import Foundation
 import UIKit
 import AVFoundation
+import Photos
 //
+
 struct Photo {
     let image: UIImage
+    let asset: PHAsset
+    let identifier: String
+    let creationDate: Date?
+    let location: CLLocation?
 }
 
 
-class SecondVC: UIViewController {
+
+
+class SecondVC: UIViewController, CLLocationManagerDelegate {
     private let session = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
     private let videoQueue = DispatchQueue(label: "videoQueue")
     private let flickButton = UIButton(type: .system)
     private var previewLayer: AVCaptureVideoPreviewLayer!
-    
+    private let locationManager = CLLocationManager()
+    static let shared = SecondVC()
     private var imageView: UIImageView!
     private var closeButton: UIButton!
     private var cameraToggleButton: UIButton!
@@ -38,6 +47,7 @@ class SecondVC: UIViewController {
         view.backgroundColor = .black
         title = "Pic"
         
+        testLocation()
         
         
         // Check if the device supports camera
@@ -109,6 +119,28 @@ class SecondVC: UIViewController {
         photosButton()
         dockArrowButton.isHidden = true
       }
+    
+    func getLocation(for asset: PHAsset, completion: @escaping (CLLocation?) -> Void) {
+        guard let location = asset.location else {
+            completion(nil)
+            return
+        }
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            guard error == nil, let placemark = placemarks?.first else {
+                completion(nil)
+                return
+            }
+            
+            let updatedLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            print("Latitude: \(updatedLocation.coordinate.latitude)")
+            print("Longitude: \(updatedLocation.coordinate.longitude)")
+            
+            completion(updatedLocation)
+        }
+    }
+
       
     @objc func didTapCameraToggleButton() {
         session.beginConfiguration()
@@ -186,6 +218,20 @@ class SecondVC: UIViewController {
             dockArrowButton.bottomAnchor.constraint(equalTo: photoArtFrameButton.bottomAnchor, constant: -26),
         ])
     }
+    
+    func testLocation() {
+        locationManager.delegate = self
+
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        if authorizationStatus == .authorizedWhenInUse {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        } else if authorizationStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            // Handle location authorization denied case
+        }
+    }
    
     @objc func didTapDockArrowButton() {
           if let image = imageView.image {
@@ -209,7 +255,7 @@ class SecondVC: UIViewController {
         photoCollectionVC.modalPresentationStyle = .fullScreen
 
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.square.fill"), style: .plain, target: nil, action: nil)
-        backButton.tintColor = .white
+        backButton.tintColor = .black
         navigationItem.backBarButtonItem = backButton
         navigationController?.pushViewController(photoCollectionVC, animated: true)
 
@@ -221,10 +267,20 @@ class SecondVC: UIViewController {
 
 
     private func savePhotoToCollection(image: UIImage) {
-           let photo = Photo(image: image)
-           SecondVC.photosArray.append(photo) // Access the photosArray directly from SecondVC
-       }
-    
+        guard let asset = getLastPhotoAsset() else {
+            return
+        }
+        
+        let identifier = asset.localIdentifier
+      
+        let date = asset.creationDate // Get the creation date from the asset
+
+        let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: nil)
+
+        
+        SecondVC.photosArray.append(photo)
+    }
+
 
        // ...
 
@@ -273,6 +329,16 @@ class SecondVC: UIViewController {
     
 }
 
+private func getLastPhotoAsset() -> PHAsset? {
+    let fetchOptions = PHFetchOptions()
+    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    fetchOptions.fetchLimit = 1
+    
+    let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+    return fetchResult.firstObject
+}
+
+
 // Implement AVCapturePhotoCaptureDelegate to handle captured photo
 extension SecondVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -284,6 +350,7 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
         guard let imageData = photo.fileDataRepresentation(),
               let image = UIImage(data: imageData) else {
             print("Error creating image from photo data.")
+            print(photo.fileDataRepresentation())
             return
         }
         
