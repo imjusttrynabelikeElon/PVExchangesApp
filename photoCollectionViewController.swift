@@ -16,8 +16,8 @@ class photoCollectionViewController: UICollectionViewController {
     var photosArray: [Photo] = []  // Update the access level to internal or public
         
     // Custom initializer to receive the photosArray
-       init(photosArray: [Photo]) {
-           self.photosArray = photosArray
+    init(photosArray: [Photo]) {
+           self.photosArray = photosArray.reversed()  // Reverse the photosArray
            
            // Call the designated initializer of the superclass
            super.init(collectionViewLayout: UICollectionViewFlowLayout())
