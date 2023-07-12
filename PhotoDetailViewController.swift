@@ -72,17 +72,38 @@ class PhotoDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 loadingAlert.dismiss(animated: true) {
                     if let photoMetadata = photoMetadata {
-                        let metadataActionTitle = "City: \(photoMetadata.city.description)\nDate: \(photoMetadata.date)\nTime: \(photoMetadata.dateTime)"
-
-                        
                         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+                        // Add the first row with the city, date, and time
+                        let metadataActionTitle = "City: \(photoMetadata.city), Date: \(photoMetadata.date), Time: \(photoMetadata.time)"
                         let metadataAction = UIAlertAction(title: metadataActionTitle, style: .default) { [weak self] _ in
                             // Handle metadata action
                         }
-                        // Add the metadata action to the action sheet
                         actionSheet.addAction(metadataAction)
 
-                        // Add other actions to the action sheet
+                        // Change the tint color of the title text for the first row
+                        metadataAction.setValue(UIColor.black, forKey: "titleTextColor")
+
+                        // Add the second row
+                        let row2Action = UIAlertAction(title: "Delete flick", style: .default) { [weak self] _ in
+                            // Handle row 2 action
+                        }
+                        actionSheet.addAction(row2Action)
+
+                        // Change the tint color of the title text for the second row
+                        row2Action.setValue(UIColor.black, forKey: "titleTextColor")
+
+                        // Add the third row
+                        let row3Action = UIAlertAction(title: "Send to auction", style: .default) { [weak self] _ in
+                            // Handle row 3 action
+                        }
+                        actionSheet.addAction(row3Action)
+
+                        // Change the tint color of the title text for the third row
+                        row3Action.setValue(UIColor.black, forKey: "titleTextColor")
+
+                        // Print the action sheet contents
+                        self?.printActionSheetContents(actionSheet)
 
                         // Present the action sheet on the main thread
                         DispatchQueue.main.async {
@@ -101,10 +122,7 @@ class PhotoDetailViewController: UIViewController {
     }
 
 
-    
-    
-    
-    
+
     private func printActionSheetContents(_ actionSheet: UIAlertController) {
         print("Action Sheet Contents:")
         print("Title: \(actionSheet.title ?? "")")
@@ -113,7 +131,7 @@ class PhotoDetailViewController: UIViewController {
             print("Action: \(action.title ?? "")")
         }
     }
-    
+
     
     func getPhotoMetadata(for photo: Photo, completion: @escaping (PhotoMetadata?) -> Void) {
         let dateFormatter = DateFormatter()
@@ -122,24 +140,24 @@ class PhotoDetailViewController: UIViewController {
         let date = dateFormatter.string(from: photo.creationDate ?? Date())
 
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm:ss"
-        timeFormatter.timeZone = TimeZone.current
-        let time = timeFormatter.string(from: photo.creationDate ?? Date())
-
-        let dateTime = "\(date) \(time)"
+        timeFormatter.dateFormat = "h:mm a"  // Use "h:mm a" format for displaying time
+        let time = timeFormatter.string(from: Date())  // Get the current time when the user saves the photo
 
         if let location = photo.location {
             // Location is available, directly retrieve the city using reverse geocoding
             getLocationString(from: location) { city in
-                let photoMetadata = PhotoMetadata(dateTime: dateTime, city: city ?? "Unknown", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, date: date)
+                let photoMetadata = PhotoMetadata(date: date, time: time, city: city ?? "Unknown", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 completion(photoMetadata)
             }
         } else {
             // If location is not available, set the city as "Unknown"
-            let photoMetadata = PhotoMetadata(dateTime: dateTime, city: "Unknown", latitude: 0, longitude: 0, date: date)
+            let photoMetadata = PhotoMetadata(date: date, time: time, city: "Unknown", latitude: 0, longitude: 0)
             completion(photoMetadata)
         }
     }
+
+
+
 
 
 
@@ -209,14 +227,14 @@ class PhotoDetailViewController: UIViewController {
     
 
 struct PhotoMetadata {
-    let dateTime: String
+    let date: String
+    let time: String
     var city: String
     let latitude: Double
     let longitude: Double
-    let date: String // Add this property for the date information
     
     var displayString: String {
-        return "City: \(city)\nDate: \(date)\nTime: \(dateTime)"
+        return "City: \(city)\nDate: \(date)\nTime: \(time)"
     }
 }
 
