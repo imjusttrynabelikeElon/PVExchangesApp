@@ -102,8 +102,9 @@ class PhotoDetailViewController: UIViewController {
                         // Change the tint color of the title text for the third row
                         row3Action.setValue(UIColor.black, forKey: "titleTextColor")
 
-                        // Print the action sheet contents
-                        self?.printActionSheetContents(actionSheet)
+                        // Add the cancel action to dismiss the action sheet
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                        actionSheet.addAction(cancelAction)
 
                         // Present the action sheet on the main thread
                         DispatchQueue.main.async {
