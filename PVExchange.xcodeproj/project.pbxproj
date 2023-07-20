@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E673ADC7FAD5206EE927B02 /* Pods_PVExchange_PVExchangeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABEE607ADDF2A19727F965E /* Pods_PVExchange_PVExchangeUITests.framework */; };
+		60B3EFA480169B4397CF0317 /* Pods_PVExchangeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DD4F78FB2DD26424CAC7A3 /* Pods_PVExchangeTests.framework */; };
 		C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */; };
+		C9408C442A68CC3900C3F4AC /* SQLiteCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */; };
 		C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95287D82A5BB42D001F2846 /* ThirdVC.swift */; };
+		C956B2642A68AFAA00AB7A18 /* SQLiteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */; };
 		C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42762A5B13D50042B107 /* AppDelegate.swift */; };
 		C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42782A5B13D50042B107 /* SceneDelegate.swift */; };
 		C96F427B2A5B13D50042B107 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F427A2A5B13D50042B107 /* ViewController.swift */; };
@@ -23,6 +27,7 @@
 		C97931132A5CDBC60015B992 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97931122A5CDBC60015B992 /* PhotoDetailViewController.swift */; };
 		C9ECB4612A5B2F3200269C3B /* ProfileViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECB4602A5B2F3200269C3B /* ProfileViewVC.swift */; };
 		C9ECB4632A5B2F6E00269C3B /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */; };
+		D12DA3760CFBBFD9790C1264 /* Pods_PVExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676AE7D138C600624D36EF37 /* Pods_PVExchange.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +48,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F09498F480F459759BCA1B8 /* Pods-PVExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchange.release.xcconfig"; path = "Target Support Files/Pods-PVExchange/Pods-PVExchange.release.xcconfig"; sourceTree = "<group>"; };
+		134D21FCC0BE7D59B9AC7158 /* Pods-PVExchange-PVExchangeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchange-PVExchangeUITests.release.xcconfig"; path = "Target Support Files/Pods-PVExchange-PVExchangeUITests/Pods-PVExchange-PVExchangeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1A7CF9A4825CF58D6805E85C /* Pods-PVExchange-PVExchangeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchange-PVExchangeUITests.debug.xcconfig"; path = "Target Support Files/Pods-PVExchange-PVExchangeUITests/Pods-PVExchange-PVExchangeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1FDC49FDCC7B114982F28360 /* Pods-PVExchangeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchangeTests.release.xcconfig"; path = "Target Support Files/Pods-PVExchangeTests/Pods-PVExchangeTests.release.xcconfig"; sourceTree = "<group>"; };
+		48DD4F78FB2DD26424CAC7A3 /* Pods_PVExchangeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PVExchangeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		676AE7D138C600624D36EF37 /* Pods_PVExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PVExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ABEE607ADDF2A19727F965E /* Pods_PVExchange_PVExchangeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PVExchange_PVExchangeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		878E6791E0AC25843E818C7A /* Pods-PVExchangeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchangeTests.debug.xcconfig"; path = "Target Support Files/Pods-PVExchangeTests/Pods-PVExchangeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BD04B5762C8B80AB69D2451F /* Pods-PVExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchange.debug.xcconfig"; path = "Target Support Files/Pods-PVExchange/Pods-PVExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewController.swift; sourceTree = "<group>"; };
+		C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteCommands.swift; sourceTree = "<group>"; };
 		C95287D82A5BB42D001F2846 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
+		C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDataBase.swift; sourceTree = "<group>"; };
 		C96F42732A5B13D50042B107 /* PVExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96F42762A5B13D50042B107 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C96F42782A5B13D50042B107 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12DA3760CFBBFD9790C1264 /* Pods_PVExchange.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B3EFA480169B4397CF0317 /* Pods_PVExchangeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,15 +102,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E673ADC7FAD5206EE927B02 /* Pods_PVExchange_PVExchangeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B98072674B77F24CFC512832 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				676AE7D138C600624D36EF37 /* Pods_PVExchange.framework */,
+				7ABEE607ADDF2A19727F965E /* Pods_PVExchange_PVExchangeUITests.framework */,
+				48DD4F78FB2DD26424CAC7A3 /* Pods_PVExchangeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C956B2622A68AF8300AB7A18 /* SQLiteDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */,
+				C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */,
+			);
+			path = SQLiteDataSource;
+			sourceTree = "<group>";
+		};
 		C96F426A2A5B13D50042B107 = {
 			isa = PBXGroup;
 			children = (
+				C956B2622A68AF8300AB7A18 /* SQLiteDataSource */,
 				C9ECB4622A5B2F6E00269C3B /* SecondVC.swift */,
 				C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */,
 				C97931122A5CDBC60015B992 /* PhotoDetailViewController.swift */,
@@ -102,6 +141,8 @@
 				C96F428F2A5B13D60042B107 /* PVExchangeTests */,
 				C96F42992A5B13D60042B107 /* PVExchangeUITests */,
 				C96F42742A5B13D50042B107 /* Products */,
+				F99DEBBD708D2A43D492FB7A /* Pods */,
+				B98072674B77F24CFC512832 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +189,19 @@
 			path = PVExchangeUITests;
 			sourceTree = "<group>";
 		};
+		F99DEBBD708D2A43D492FB7A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BD04B5762C8B80AB69D2451F /* Pods-PVExchange.debug.xcconfig */,
+				0F09498F480F459759BCA1B8 /* Pods-PVExchange.release.xcconfig */,
+				1A7CF9A4825CF58D6805E85C /* Pods-PVExchange-PVExchangeUITests.debug.xcconfig */,
+				134D21FCC0BE7D59B9AC7158 /* Pods-PVExchange-PVExchangeUITests.release.xcconfig */,
+				878E6791E0AC25843E818C7A /* Pods-PVExchangeTests.debug.xcconfig */,
+				1FDC49FDCC7B114982F28360 /* Pods-PVExchangeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,9 +209,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C96F42A02A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchange" */;
 			buildPhases = (
+				E1408737D9C3A0AC5925A35B /* [CP] Check Pods Manifest.lock */,
 				C96F426F2A5B13D50042B107 /* Sources */,
 				C96F42702A5B13D50042B107 /* Frameworks */,
 				C96F42712A5B13D50042B107 /* Resources */,
+				C7AA5A91B73C18B10C9D3DCB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -172,6 +228,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C96F42A32A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeTests" */;
 			buildPhases = (
+				A72B64300BC64F1777082C2E /* [CP] Check Pods Manifest.lock */,
 				C96F42882A5B13D60042B107 /* Sources */,
 				C96F42892A5B13D60042B107 /* Frameworks */,
 				C96F428A2A5B13D60042B107 /* Resources */,
@@ -190,9 +247,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C96F42A62A5B13D60042B107 /* Build configuration list for PBXNativeTarget "PVExchangeUITests" */;
 			buildPhases = (
+				6AB6A76D3833434FCB651FE3 /* [CP] Check Pods Manifest.lock */,
 				C96F42922A5B13D60042B107 /* Sources */,
 				C96F42932A5B13D60042B107 /* Frameworks */,
 				C96F42942A5B13D60042B107 /* Resources */,
+				0B56AEBA5C14D6EFB813A074 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -274,6 +333,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B56AEBA5C14D6EFB813A074 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PVExchange-PVExchangeUITests/Pods-PVExchange-PVExchangeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PVExchange-PVExchangeUITests/Pods-PVExchange-PVExchangeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PVExchange-PVExchangeUITests/Pods-PVExchange-PVExchangeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AB6A76D3833434FCB651FE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PVExchange-PVExchangeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A72B64300BC64F1777082C2E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PVExchangeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7AA5A91B73C18B10C9D3DCB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PVExchange/Pods-PVExchange-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PVExchange/Pods-PVExchange-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PVExchange/Pods-PVExchange-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1408737D9C3A0AC5925A35B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PVExchange-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C96F426F2A5B13D50042B107 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -282,11 +444,13 @@
 				C96F42812A5B13D50042B107 /* PVExchange.xcdatamodeld in Sources */,
 				C9ECB4612A5B2F3200269C3B /* ProfileViewVC.swift in Sources */,
 				C9ECB4632A5B2F6E00269C3B /* SecondVC.swift in Sources */,
+				C9408C442A68CC3900C3F4AC /* SQLiteCommands.swift in Sources */,
 				C96F42AA2A5B16310042B107 /* Tabbar.swift in Sources */,
 				C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */,
 				C96F427B2A5B13D50042B107 /* ViewController.swift in Sources */,
 				C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */,
 				C96F42792A5B13D50042B107 /* SceneDelegate.swift in Sources */,
+				C956B2642A68AFAA00AB7A18 /* SQLiteDataBase.swift in Sources */,
 				C97931132A5CDBC60015B992 /* PhotoDetailViewController.swift in Sources */,
 				C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */,
 			);
@@ -460,6 +624,7 @@
 		};
 		C96F42A12A5B13D60042B107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD04B5762C8B80AB69D2451F /* Pods-PVExchange.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -488,6 +653,7 @@
 		};
 		C96F42A22A5B13D60042B107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F09498F480F459759BCA1B8 /* Pods-PVExchange.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -516,6 +682,7 @@
 		};
 		C96F42A42A5B13D60042B107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 878E6791E0AC25843E818C7A /* Pods-PVExchangeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -536,6 +703,7 @@
 		};
 		C96F42A52A5B13D60042B107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FDC49FDCC7B114982F28360 /* Pods-PVExchangeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -556,6 +724,7 @@
 		};
 		C96F42A72A5B13D60042B107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A7CF9A4825CF58D6805E85C /* Pods-PVExchange-PVExchangeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -574,6 +743,7 @@
 		};
 		C96F42A82A5B13D60042B107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 134D21FCC0BE7D59B9AC7158 /* Pods-PVExchange-PVExchangeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

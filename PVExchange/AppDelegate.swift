@@ -15,8 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        _ = SQliteDatabase.sharedInstance
+
+        // Create the table by passing the database connection to the createTable function
+        if let database = SQliteDatabase.sharedInstance.database, SQliteDatabase.sharedInstance.isInitialized {
+            SQliteDatabase.sharedInstance.createTable()
+        }
+
         return true
     }
+
 
     // MARK: UISceneSession Lifecycle
 

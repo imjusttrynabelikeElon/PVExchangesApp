@@ -10,6 +10,9 @@ import UIKit
 import AVFoundation
 import Photos
 //
+// make the photos show on the profileView blury
+// and save the pictures from the collection view
+
 
 struct Photo {
     let image: UIImage
@@ -17,9 +20,16 @@ struct Photo {
     let identifier: String
     let creationDate: Date?
     let location: CLLocation?
+    
+    init(image: UIImage, asset: PHAsset, identifier: String, creationDate: Date?, location: CLLocation?) {
+        self.image = image
+        self.asset = asset
+        self.identifier = identifier
+        self.creationDate = creationDate
+        self.location = location
+    }
+    
 }
-
-
 
 
 class SecondVC: UIViewController, CLLocationManagerDelegate {
@@ -39,6 +49,8 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
     let photoArtFrameButton = UIButton(type: .system)
     let dockArrowButton = UIButton(type: .system)
     private weak var photoCollectionView: UICollectionView?
+    private var capturedAsset: PHAsset?
+
     
     static var photosArray: [Photo] = []
     
@@ -104,6 +116,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         cameraToggle()
     }
     
+    // this is the c
     func cameraToggle() {
         // Add camera toggle button
         cameraToggleButton = UIButton(type: .system)
@@ -242,7 +255,18 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
             return
         }
 
-        savePhotoToCollection(image: image)
+        // Assuming you have obtained the PHAsset object from some other place in your code
+        guard let asset = getLastPhotoAsset() else {
+            print("Error: PHAsset is nil.")
+            return
+        }
+
+
+        // Assuming you have 'identifier', 'creationDate', and 'location' from some other place in your code
+        let photo = Photo(image: image, asset: asset, identifier: asset.localIdentifier, creationDate: asset.creationDate, location: asset.location)
+
+        // Insert the photo into the database
+        SQliteDatabase.sharedInstance.insertPhoto(photo: photo)
 
         // Reset the view after saving the photo
         imageView?.removeFromSuperview()
@@ -254,6 +278,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         photoArtFrameButton.isHidden = false
         dockArrowButton.isHidden = true
     }
+
 
     
     @objc func didTapPhotoArtFrameButton() {

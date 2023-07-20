@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 private let reuseIdentifier = PhotoCollectionViewCell.reuseIdentifier
 
@@ -61,9 +62,28 @@ class photoCollectionViewController: UICollectionViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView.reloadData()
-    }
+           super.viewWillAppear(animated)
+
+           // Check if the database is initialized before retrieving photos
+           guard SQliteDatabase.sharedInstance.isInitialized else {
+               // Delay the retrieval until the database is initialized
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // Adjust the delay time as needed
+                   self.viewWillAppear(animated)
+               }
+               return
+           }
+
+           // Create the "photos" table if it doesn't exist
+           SQliteDatabase.sharedInstance.createTable()
+
+           // Retrieve photos from the database and update the photosArray
+           photosArray = SQliteDatabase.sharedInstance.getAllPhotos()
+           collectionView.reloadData()
+       }
+
+
+
+
     
     // MARK: - Collection View Data Source
     
@@ -75,7 +95,11 @@ class photoCollectionViewController: UICollectionViewController {
         let photo = photosArray[indexPath.item]
         let detailViewController = PhotoDetailViewController(photo: photo)
         navigationController?.pushViewController(detailViewController, animated: true)
+
+        // Save the photo to the database when selected
+        SQliteDatabase.sharedInstance.insertPhoto(photo: photo)
     }
+
 
       
 
@@ -141,6 +165,17 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with photo: Photo) {
-        imageView.image = photo.image
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
+
+        // Fetch the image from the asset
+        imageManager.requestImage(for: photo.asset, targetSize: frame.size, contentMode: .aspectFill, options: requestOptions) { image, _ in
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }
     }
+
 }
