@@ -15,24 +15,28 @@ import Photos
 
 
 struct Photo {
-    let image: UIImage
-    let asset: PHAsset
-    let identifier: String
-    let creationDate: Date?
-    let location: CLLocation?
-    
-    init(image: UIImage, asset: PHAsset, identifier: String, creationDate: Date?, location: CLLocation?) {
+    var image: UIImage
+    var identifier: String
+    var creationDate: Date
+    var location: CLLocation?
+
+    init(image: UIImage, identifier: String, creationDate: Date, location: CLLocation?) {
         self.image = image
-        self.asset = asset
         self.identifier = identifier
         self.creationDate = creationDate
         self.location = location
     }
-    
 }
 
 
-class SecondVC: UIViewController, CLLocationManagerDelegate {
+
+class SecondVC: UIViewController, CLLocationManagerDelegate, PhotoCollectionViewControllerDelegate {
+    func photosUpdated() {
+        // Reload the collection view or perform any other action needed when photos are updated
+               photoCollectionView?.reloadData()
+    }
+    
+    
     private let session = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
     private let videoQueue = DispatchQueue(label: "videoQueue")
@@ -62,6 +66,11 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         
         testLocation()
         
+        // Add photoCollectionVC as a child view controller
+              let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray)
+              photoCollectionVC.delegate = self // Set self as the delegate
+              // ... (existing code)
+        
         
         // Check if the device supports camera
         guard let device = AVCaptureDevice.default(for: .video) else {
@@ -77,13 +86,17 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
                 
                 if session.canAddOutput(photoOutput) {
                     session.addOutput(photoOutput)
-                    
+
                     previewLayer = AVCaptureVideoPreviewLayer(session: session)
                     previewLayer.videoGravity = .resizeAspectFill
                     previewLayer.frame = view.bounds
                     view.layer.addSublayer(previewLayer)
-                    
-                    session.startRunning()
+
+                    // Start the AVCaptureSession on a background queue
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        self.session.startRunning()
+                    }
+                
                 } else {
                     showAlert(message: "Unable to add photo output")
                 }
@@ -263,10 +276,11 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
 
 
         // Assuming you have 'identifier', 'creationDate', and 'location' from some other place in your code
-        let photo = Photo(image: image, asset: asset, identifier: asset.localIdentifier, creationDate: asset.creationDate, location: asset.location)
+        let photo = Photo(image: image, identifier: asset.localIdentifier, creationDate: asset.creationDate!, location: asset.location)
 
         // Insert the photo into the database
         SQliteDatabase.sharedInstance.insertPhoto(photo: photo)
+        
 
         // Reset the view after saving the photo
         imageView?.removeFromSuperview()
@@ -282,9 +296,11 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
 
     
     @objc func didTapPhotoArtFrameButton() {
-        let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray)
+        let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray) // Pass the photosArray to the photoCollectionVC
+           // Rest of your code...
         photoCollectionVC.modalTransitionStyle = .coverVertical
         photoCollectionVC.modalPresentationStyle = .fullScreen
+        
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.square.fill"), style: .plain, target: nil, action: nil)
         backButton.tintColor = .black
@@ -314,11 +330,12 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         
         let date = asset.creationDate // Get the creation date from the asset
         
-        let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: nil)
+        let photo = Photo(image: image, identifier: identifier, creationDate: date!, location: nil)
         
+        SQliteDatabase.sharedInstance.insertPhoto(photo: photo)
         
-       
     }
+
     
     
     // ...
@@ -389,32 +406,32 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
 
 
 
-   extension SecondVC: AVCapturePhotoCaptureDelegate {
+extension SecondVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let error = error {
             print("Error capturing photo: \(error.localizedDescription)")
             return
         }
-        
+
         guard let imageData = photo.fileDataRepresentation(),
               let image = UIImage(data: imageData) else {
             print("Error creating image from photo data.")
             return
         }
-        
+
         // Create and configure the image view
         imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
-        
+
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: flickButton.topAnchor, constant: -20)
         ])
-        
+
         // Create and configure the close button
         closeButton = UIButton(type: .system)
         closeButton.setTitle("X", for: .normal)
@@ -422,31 +439,32 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
-        
+
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
-        
+
         guard let location = locationManager.location else {
             print("Location is not available.")
             return
         }
-        
+
         guard let asset = getLastPhotoAsset() else {
             print("Asset is not available.")
             return
         }
-        
+
         let identifier = asset.localIdentifier
         let date = asset.creationDate
-        
-        let capturedPhoto = Photo(image: image, asset: asset, identifier: identifier, creationDate: date, location: location)
-        SecondVC.photosArray.append(capturedPhoto)
-        
+
+        let capturedPhoto = Photo(image: image, identifier: identifier, creationDate: date!, location: location)
+        SecondVC.photosArray.append(capturedPhoto) // Append the captured photo to the array
+
         // Continue with any additional processing or UI updates
         // ...
     }
+
     
     @objc func didTapCloseButton() {
         imageView.removeFromSuperview()
@@ -459,4 +477,3 @@ class SecondVC: UIViewController, CLLocationManagerDelegate {
         dockArrowButton.isHidden = true
     }
 }
-

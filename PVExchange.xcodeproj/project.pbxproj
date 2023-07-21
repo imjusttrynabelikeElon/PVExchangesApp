@@ -11,6 +11,7 @@
 		60B3EFA480169B4397CF0317 /* Pods_PVExchangeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DD4F78FB2DD26424CAC7A3 /* Pods_PVExchangeTests.framework */; };
 		C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */; };
 		C9408C442A68CC3900C3F4AC /* SQLiteCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */; };
+		C9415BDE2A69C90000883F14 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C9415BDD2A69C90000883F14 /* images.jpeg */; };
 		C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95287D82A5BB42D001F2846 /* ThirdVC.swift */; };
 		C956B2642A68AFAA00AB7A18 /* SQLiteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */; };
 		C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42762A5B13D50042B107 /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		BD04B5762C8B80AB69D2451F /* Pods-PVExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVExchange.debug.xcconfig"; path = "Target Support Files/Pods-PVExchange/Pods-PVExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewController.swift; sourceTree = "<group>"; };
 		C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteCommands.swift; sourceTree = "<group>"; };
+		C9415BDD2A69C90000883F14 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		C95287D82A5BB42D001F2846 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
 		C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDataBase.swift; sourceTree = "<group>"; };
 		C96F42732A5B13D50042B107 /* PVExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 				C9ECB4602A5B2F3200269C3B /* ProfileViewVC.swift */,
 				C96F427C2A5B13D50042B107 /* Main.storyboard */,
 				C96F42822A5B13D60042B107 /* Assets.xcassets */,
+				C9415BDD2A69C90000883F14 /* images.jpeg */,
 				C96F42842A5B13D60042B107 /* LaunchScreen.storyboard */,
 				C96F42872A5B13D60042B107 /* Info.plist */,
 				C96F427F2A5B13D50042B107 /* PVExchange.xcdatamodeld */,
@@ -312,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96F42862A5B13D60042B107 /* LaunchScreen.storyboard in Resources */,
+				C9415BDE2A69C90000883F14 /* images.jpeg in Resources */,
 				C96F42832A5B13D60042B107 /* Assets.xcassets in Resources */,
 				C96F427E2A5B13D50042B107 /* Main.storyboard in Resources */,
 			);

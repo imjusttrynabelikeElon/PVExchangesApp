@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = SQliteDatabase.sharedInstance
 
         // Create the table by passing the database connection to the createTable function
-        if let database = SQliteDatabase.sharedInstance.database, SQliteDatabase.sharedInstance.isInitialized {
-            SQliteDatabase.sharedInstance.createTable()
-        }
+      
 
         return true
     }

@@ -37,7 +37,7 @@ class PhotoDetailViewController: UIViewController {
         view.addSubview(imageView)
         
         // Print the asset location
-           print("Asset Location: \(photo.asset.location)")
+      
            
            // Call the method to retrieve photo metadata
         getPhotoMetadata(for: photo) { [weak self] photoMetadata in

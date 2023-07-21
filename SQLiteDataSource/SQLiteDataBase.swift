@@ -9,62 +9,112 @@ import Foundation
 import SQLite
 import Photos
 
+protocol SQliteDatabaseDelegate: AnyObject {
+    func photoInserted(photo: Photo)
+}
 
 class SQliteDatabase {
     static let sharedInstance = SQliteDatabase()
-    var database: Connection?
-    var isInitialized: Bool = false // Add the isInitialized property
-    
-    private init() {
-        // Create connection to the database
+       var database: Connection?
+       var isInitialized: Bool = false // Add the isInitialized property
+       weak var delegate: SQliteDatabaseDelegate?
+       
+       private init() {
+           // Create connection to the database
+           do {
+               let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+               let fileUrl = documentDirectory.appendingPathComponent("myDatabase.sqlite3")
+               database = try Connection(fileUrl.path)
+               
+               // Debug print statements
+               print("Database connection successful")
+               
+               isInitialized = true // Mark the database as initialized
+               
+               if !isTableExists("photos") {
+                   createTable() // Call the createTable() function only if the "photos" table does not exist
+               }
+           } catch {
+               print("Creating connection to the database error: \(error)")
+           }
+       }
+    func initializeDatabase(completion: @escaping (Bool) -> Void) {
+        // Get the URL for the documents directory where the database file will be stored
+        guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Error: Could not get documents directory URL.")
+            completion(false) // Call the completion handler with `false` to indicate initialization failure
+            return
+        }
+        
+        // Append the database file name to the documents directory URL
+        let databaseFileURL = documentsDirectoryURL.appendingPathComponent("photos.sqlite")
+        
         do {
-            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileUrl = documentDirectory.appendingPathComponent("myDatabase.sqlite3")
-            database = try Connection(fileUrl.path)
+            // Create a connection to the database file
+            let database = try Connection(databaseFileURL.path)
+            self.database = database // Assign the database connection to the instance variable
             
-            // Debug print statements
-            print("Database connection successful")
+            // Create the "photos" table if it doesn't exist
+            let photosTable = Table("photos")
+            let imageData = Expression<Data>("imageData")
+            let assetData = Expression<Data?>("assetData")
+            let identifierData = Expression<Data?>("identifierData")
+            let creationDate = Expression<Date?>("creationDate")
+            let latitude = Expression<Double?>("latitude")
+            let longitude = Expression<Double?>("longitude")
             
-            isInitialized = true // Mark the database as initialized
+            try database.run(photosTable.create(ifNotExists: true) { table in
+                table.column(imageData)
+                table.column(assetData)
+                table.column(identifierData)
+                table.column(creationDate)
+                table.column(latitude)
+                table.column(longitude)
+            })
             
-            if !isTableExists("photos") {
-                createTable() // Call the createTable() function only if the "photos" table does not exist
-            }
+            // Database is now initialized
+            isInitialized = true
+            completion(true) // Call the completion handler with `true` to indicate successful initialization
         } catch {
-            print("Creating connection to the database error: \(error)")
+            print("Error initializing database: \(error)")
+            completion(false) // Call the completion handler with `false` to indicate initialization failure
         }
     }
-    
-    
-    
+
+
     
     func insertPhoto(photo: Photo) {
-        do {
-            guard let database = database else {
-                print("Error: Database is not initialized.")
-                return
-            }
-            
-            let photosTable = Table("photos")
-            let id = Expression<Int>("id")
-            let imageData = Expression<Data>("imageData")
-            let identifierData = Expression<Data?>("identifierData") // Changed from assetData to identifierData
-            
-            let insert = photosTable.insert(
-                imageData <- photo.image.pngData()!,
-                identifierData <- photo.asset.localIdentifier.data(using: .utf8) // Store the identifier as Data
-            )
-            
-            do {
-                let rowID = try database.run(insert)
-                print("Photo inserted with rowID: \(rowID)")
-            } catch {
-                print("Error inserting photo: \(error)")
-            }
-        } catch {
-            print("Error creating photos table: \(error)")
-        }
-    }
+           do {
+               guard let database = database else {
+                   print("Error: Database is not initialized.")
+                   return
+               }
+
+               let photosTable = Table("photos")
+               let id = Expression<Int>("id")
+               let imageData = Expression<Data>("imageData")
+               let identifierData = Expression<Data?>("identifierData") // Change from assetData to identifierData
+               let creationDate = Expression<Date?>("creationDate")
+               let latitude = Expression<Double?>("latitude")
+               let longitude = Expression<Double?>("longitude")
+
+               let insert = photosTable.insert(
+                   imageData <- photo.image.pngData()!,
+                   identifierData <- photo.identifier.data(using: .utf8) // Store the identifier as Data
+               )
+
+               do {
+                   let rowID = try database.run(insert)
+                   print("Photo inserted with rowID: \(rowID)")
+                   // Notify the delegate that a new photo is inserted
+                   delegate?.photoInserted(photo: photo)
+               } catch {
+                   print("Error inserting photo: \(error)")
+               }
+           } catch {
+               print("Error creating photos table: \(error)")
+           }
+       }
 
     
     func getAllPhotos() -> [Photo] {
@@ -76,28 +126,36 @@ class SQliteDatabase {
             }
             
             let photosTable = Table("photos")
-            let imageData = Expression<Data?>("imageData")
-            let assetData = Expression<Data?>("assetData") // Add the assetData column
+            let imageData = Expression<Data>("imageData")
             let identifierData = Expression<Data?>("identifierData")
             let creationDate = Expression<Date?>("creationDate")
             let latitude = Expression<Double?>("latitude")
             let longitude = Expression<Double?>("longitude")
             
+            // Clear the photos array before populating (you don't need to do this, it will be filled again below)
+            photos.removeAll()
+
             for photo in try database.prepare(photosTable) {
-                if let imageData = photo[imageData],
-                   let image = UIImage(data: imageData),
-                   let assetData = photo[assetData], // Add this line to get the assetData column
-                   let asset = NSKeyedUnarchiver.unarchiveObject(with: assetData) as? PHAsset, // Unarchive the asset data back to PHAsset
-                   let identifierData = photo[identifierData],
-                   let identifier = String(data: identifierData, encoding: .utf8), // Convert Data back to String
-                   let creationDate = photo[creationDate],
-                   let latitude = photo[latitude],
-                   let longitude = photo[longitude]
+                // Extract values from each column
+                let imageDataValue = photo[imageData]
+                let identifierDataValue = photo[identifierData]
+                let creationDateValue = photo[creationDate] // Optional Date type
+                let latitudeValue = photo[latitude]
+                let longitudeValue = photo[longitude]
+                
+                // Convert Data to UIImage
+                if let image = UIImage(data: imageDataValue),
+                    // Unarchive the identifier from Data to String
+                    let identifierDataValue = identifierDataValue,
+                    let identifier = String(data: identifierDataValue, encoding: .utf8),
+                    // Check if creationDate, latitude, and longitude are not nil before creating CLLocation
+                    let creationDate = creationDateValue,
+                    let latitude = latitudeValue,
+                    let longitude = longitudeValue
                 {
-                    print("Photo retrieved with identifier: \(identifier)")
-                    
                     // Create the Photo instance and add it to the photos array
-                    let photo = Photo(image: image, asset: asset, identifier: identifier, creationDate: creationDate, location: CLLocation(latitude: latitude, longitude: longitude))
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
+                    let photo = Photo(image: image, identifier: identifier, creationDate: creationDate, location: location)
                     photos.append(photo)
                 }
             }
@@ -106,6 +164,7 @@ class SQliteDatabase {
         }
         return photos
     }
+
 
 
     
