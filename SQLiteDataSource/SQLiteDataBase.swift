@@ -5,6 +5,7 @@
 //  Created by Karon Bell on 7/19/23.
 //
 
+
 import Foundation
 import SQLite
 import Photos
@@ -50,9 +51,15 @@ class SQliteDatabase {
         let databaseFileURL = documentsDirectoryURL.appendingPathComponent("photos.sqlite")
         
         do {
+            
+            
             // Create a connection to the database file
-            let database = try Connection(databaseFileURL.path)
-            self.database = database // Assign the database connection to the instance variable
+                   let database = try Connection(databaseFileURL.path)
+                   self.database = database // Assign the database connection to the instance variable
+
+                   // ... (rest of the code)
+                   print("Database initialized successfully") // Add this line
+                   completion(true) // Call the completion handler with `true` to indicate successful initialization
             
             // Create the "photos" table if it doesn't exist
             let photosTable = Table("photos")
@@ -84,37 +91,50 @@ class SQliteDatabase {
 
     
     func insertPhoto(photo: Photo) {
-           do {
-               guard let database = database else {
-                   print("Error: Database is not initialized.")
-                   return
-               }
+        do {
+            guard let database = database else {
+                print("Error: Database is not initialized.")
+                return
+            }
 
-               let photosTable = Table("photos")
-               let id = Expression<Int>("id")
-               let imageData = Expression<Data>("imageData")
-               let identifierData = Expression<Data?>("identifierData") // Change from assetData to identifierData
-               let creationDate = Expression<Date?>("creationDate")
-               let latitude = Expression<Double?>("latitude")
-               let longitude = Expression<Double?>("longitude")
+            let photosTable = Table("photos")
+            let id = Expression<Int>("id")
+            let imageData = Expression<Data>("imageData")
+            let identifierData = Expression<Data?>("identifierData")
+            let creationDate = Expression<Date>("creationDate") // Change to non-optional Date
+            let latitude = Expression<Double>("latitude") // Change to non-optional Double
+            let longitude = Expression<Double>("longitude") // Change to non-optional Double
 
-               let insert = photosTable.insert(
-                   imageData <- photo.image.pngData()!,
-                   identifierData <- photo.identifier.data(using: .utf8) // Store the identifier as Data
-               )
+            // Check if photo.creationDate is not nil, and if it is, use Date() as a default value
+            let insertionDate = photo.creationDate ?? Date()
 
-               do {
-                   let rowID = try database.run(insert)
-                   print("Photo inserted with rowID: \(rowID)")
-                   // Notify the delegate that a new photo is inserted
-                   delegate?.photoInserted(photo: photo)
-               } catch {
-                   print("Error inserting photo: \(error)")
-               }
-           } catch {
-               print("Error creating photos table: \(error)")
-           }
-       }
+            // Check if photo.location is not nil, and if it is, use 0.0 as default latitude and longitude values
+            let latitudeValue = photo.location?.coordinate.latitude ?? 0.0
+            let longitudeValue = photo.location?.coordinate.longitude ?? 0.0
+
+            let insert = photosTable.insert(
+                imageData <- photo.image.pngData()!,
+                identifierData <- photo.identifier.data(using: .utf8),
+                creationDate <- insertionDate,
+                latitude <- latitudeValue,
+                longitude <- longitudeValue
+            )
+
+            do {
+                let rowID = try database.run(insert)
+                print("Photo inserted with rowID: \(rowID)")
+
+                // Notify the delegate that a new photo is inserted
+                delegate?.photoInserted(photo: photo)
+            } catch {
+                print("Error inserting photo: \(error)")
+            }
+        } catch {
+            print("Error creating photos table: \(error)")
+        }
+    }
+
+
 
     
     func getAllPhotos() -> [Photo] {
@@ -131,9 +151,6 @@ class SQliteDatabase {
             let creationDate = Expression<Date?>("creationDate")
             let latitude = Expression<Double?>("latitude")
             let longitude = Expression<Double?>("longitude")
-            
-            // Clear the photos array before populating (you don't need to do this, it will be filled again below)
-            photos.removeAll()
 
             for photo in try database.prepare(photosTable) {
                 // Extract values from each column
@@ -143,12 +160,16 @@ class SQliteDatabase {
                 let latitudeValue = photo[latitude]
                 let longitudeValue = photo[longitude]
                 
+                print("ImageData: \(imageDataValue)")
+                print("IdentifierData: \(identifierDataValue)")
+                print("CreationDate: \(creationDateValue)")
+                print("Latitude: \(latitudeValue)")
+                print("Longitude: \(longitudeValue)")
+                
                 // Convert Data to UIImage
                 if let image = UIImage(data: imageDataValue),
-                    // Unarchive the identifier from Data to String
                     let identifierDataValue = identifierDataValue,
                     let identifier = String(data: identifierDataValue, encoding: .utf8),
-                    // Check if creationDate, latitude, and longitude are not nil before creating CLLocation
                     let creationDate = creationDateValue,
                     let latitude = latitudeValue,
                     let longitude = longitudeValue
@@ -172,44 +193,41 @@ class SQliteDatabase {
     // Add the createTable function that takes a database connection as a parameter
     // Add the createTable function to create the "photos" table
     func createTable() {
-           guard let database = database else {
-               print("Error: Database is not initialized.")
-               return
-           }
-           
-           do {
-               if isTableExists("photos") {
-                   print("Table 'photos' already exists.")
-                   return
-               }
-               
-               let photosTable = Table("photos")
-               let id = Expression<Int>("id")
-               let imageData = Expression<Data>("imageData")
-               let identifierData = Expression<Data?>("identifierData") // Add the identifierData column
-               let creationDate = Expression<Date?>("creationDate")
-               let latitude = Expression<Double?>("latitude")
-               let longitude = Expression<Double?>("longitude")
-               
-               let assetData = Expression<Data?>("assetData") // Add the assetData column
+        guard let database = database else {
+            print("Error: Database is not initialized.")
+            return
+        }
 
-                  try database.run(photosTable.create(ifNotExists: true) { table in
-                      table.column(id, primaryKey: .autoincrement)
-                      table.column(imageData)
-                      table.column(assetData) // Add the assetData column
-                      table.column(identifierData)
-                      table.column(creationDate)
-                      table.column(latitude)
-                      table.column(longitude)
-                  })
-               
-               // Debug print statement
-               print("Table 'photos' created successfully")
-           } catch {
-               print("Error creating table: \(error)")
-           }
-       }
-    
+        do {
+            if isTableExists("photos") {
+                print("Table 'photos' already exists.")
+                return
+            }
+
+            let photosTable = Table("photos")
+            let id = Expression<Int>("id")
+            let imageData = Expression<Data>("imageData")
+            let identifierData = Expression<Data?>("identifierData")
+            let creationDate = Expression<Date>("creationDate") // Change to non-optional Date
+            let latitude = Expression<Double>("latitude") // Change to non-optional Double
+            let longitude = Expression<Double>("longitude") // Change to non-optional Double
+
+            try database.run(photosTable.create(ifNotExists: true) { table in
+                table.column(id, primaryKey: .autoincrement)
+                table.column(imageData)
+                table.column(identifierData)
+                table.column(creationDate)
+                table.column(latitude)
+                table.column(longitude)
+            })
+
+            // Debug print statement
+            print("Table 'photos' created successfully")
+        } catch {
+            print("Error creating table: \(error)")
+        }
+    }
+
     // Helper function to check if a table exists
     func isTableExists(_ tableName: String) -> Bool {
         guard let database = database else {

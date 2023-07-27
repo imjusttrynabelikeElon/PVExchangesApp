@@ -12,6 +12,7 @@
 		C93F72902A5C5BF300F796E5 /* photoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */; };
 		C9408C442A68CC3900C3F4AC /* SQLiteCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */; };
 		C9415BDE2A69C90000883F14 /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C9415BDD2A69C90000883F14 /* images.jpeg */; };
+		C94AAB6A2A71F0FC00DE5403 /* kbb.png in Resources */ = {isa = PBXBuildFile; fileRef = C94AAB692A71F0FC00DE5403 /* kbb.png */; };
 		C95287D92A5BB42D001F2846 /* ThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95287D82A5BB42D001F2846 /* ThirdVC.swift */; };
 		C956B2642A68AFAA00AB7A18 /* SQLiteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */; };
 		C96F42772A5B13D50042B107 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96F42762A5B13D50042B107 /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		C93F728F2A5C5BF300F796E5 /* photoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoCollectionViewController.swift; sourceTree = "<group>"; };
 		C9408C432A68CC3900C3F4AC /* SQLiteCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteCommands.swift; sourceTree = "<group>"; };
 		C9415BDD2A69C90000883F14 /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
+		C94AAB692A71F0FC00DE5403 /* kbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kbb.png; sourceTree = "<group>"; };
 		C95287D82A5BB42D001F2846 /* ThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdVC.swift; sourceTree = "<group>"; };
 		C956B2632A68AFAA00AB7A18 /* SQLiteDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDataBase.swift; sourceTree = "<group>"; };
 		C96F42732A5B13D50042B107 /* PVExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				C96F427C2A5B13D50042B107 /* Main.storyboard */,
 				C96F42822A5B13D60042B107 /* Assets.xcassets */,
 				C9415BDD2A69C90000883F14 /* images.jpeg */,
+				C94AAB692A71F0FC00DE5403 /* kbb.png */,
 				C96F42842A5B13D60042B107 /* LaunchScreen.storyboard */,
 				C96F42872A5B13D60042B107 /* Info.plist */,
 				C96F427F2A5B13D50042B107 /* PVExchange.xcdatamodeld */,
@@ -314,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C94AAB6A2A71F0FC00DE5403 /* kbb.png in Resources */,
 				C96F42862A5B13D60042B107 /* LaunchScreen.storyboard in Resources */,
 				C9415BDE2A69C90000883F14 /* images.jpeg in Resources */,
 				C96F42832A5B13D60042B107 /* Assets.xcassets in Resources */,

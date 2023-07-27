@@ -56,7 +56,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate, PhotoCollectionView
     private var capturedAsset: PHAsset?
 
     
-    static var photosArray: [Photo] = []
+     var photosArray: [Photo] = []
     
     
     override func viewDidLoad() {
@@ -67,7 +67,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate, PhotoCollectionView
         testLocation()
         
         // Add photoCollectionVC as a child view controller
-              let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray)
+              let photoCollectionVC = photoCollectionViewController(photosArray: photosArray)
               photoCollectionVC.delegate = self // Set self as the delegate
               // ... (existing code)
         
@@ -296,7 +296,7 @@ class SecondVC: UIViewController, CLLocationManagerDelegate, PhotoCollectionView
 
     
     @objc func didTapPhotoArtFrameButton() {
-        let photoCollectionVC = photoCollectionViewController(photosArray: SecondVC.photosArray) // Pass the photosArray to the photoCollectionVC
+        let photoCollectionVC = photoCollectionViewController(photosArray: photosArray) // Pass the photosArray to the photoCollectionVC
            // Rest of your code...
         photoCollectionVC.modalTransitionStyle = .coverVertical
         photoCollectionVC.modalPresentationStyle = .fullScreen
@@ -418,9 +418,10 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
             print("Error creating image from photo data.")
             return
         }
+        let fixedImage = image.fixOrientation()
 
         // Create and configure the image view
-        imageView = UIImageView(image: image)
+        imageView = UIImageView(image: fixedImage)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -459,7 +460,7 @@ extension SecondVC: AVCapturePhotoCaptureDelegate {
         let date = asset.creationDate
 
         let capturedPhoto = Photo(image: image, identifier: identifier, creationDate: date!, location: location)
-        SecondVC.photosArray.append(capturedPhoto) // Append the captured photo to the array
+        self.photosArray.append(capturedPhoto) // Append the captured photo to the array
 
         // Continue with any additional processing or UI updates
         // ...
